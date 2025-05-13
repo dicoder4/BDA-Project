@@ -7,9 +7,19 @@ const recordSchema = new mongoose.Schema({
   age: Number,
   hospitalName: String,
   test: String,
-  result: String,
-  doctorHash: String,
-  notesHash: String,
+  result: {
+    iv: String,
+    content: String
+  },
+  doctorHash: {
+    iv: String,
+    content: String
+  },
+  notesHash: {
+    iv: String,
+    content: String
+  },
+  
   recordID: String
 });
 
