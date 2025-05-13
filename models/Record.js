@@ -1,27 +1,18 @@
 import mongoose from 'mongoose';
 
 const recordSchema = new mongoose.Schema({
-  patientHash: String,
-  nameHash: String,
-  genderHash: String,
-  age: Number,
-  hospitalName: String,
-  test: String,
-  result: {
-    iv: String,
-    content: String
-  },
-  doctorHash: {
-    iv: String,
-    content: String
-  },
-  notesHash: {
-    iv: String,
-    content: String
-  },
-  
-  recordID: String
+  patientHash: { type: String, required: true },
+  name: { type: String, required: true },     
+  gender: { type: String, required: true },   
+  notes: { type: String },
+
+  age: { type: Number, required: true },
+  hospitalName: { type: String, required: true },
+  test: { type: String, required: true },
+  result: { type: String, required: true },           // ✅ plaintext string now
+  doctorHash: { type: String, required: true },       // ✅ hashed string now
+
+  recordID: { type: String, required: true }
 });
 
-export default mongoose.model('records', recordSchema, 'medicalrecords'); 
-// 'medicalrecords' is the collection name
+export default mongoose.model('records', recordSchema, 'medicalrecords');

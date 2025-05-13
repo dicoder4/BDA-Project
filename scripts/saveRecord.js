@@ -7,21 +7,6 @@ import Record from '../models/Record.js';
 const { keccak256 } = sha3;
 dotenv.config();
 
-const algorithm = 'aes-256-cbc';
-const secretKey = process.env.SECRET_KEY;
-const ivLength = 16;
-
-function encrypt(text) {
-  const iv = crypto.randomBytes(ivLength);
-  const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey, 'hex'), iv);
-  let encrypted = cipher.update(text, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
-  return {
-    iv: iv.toString('hex'),
-    content: encrypted
-  };
-}
-
 export async function saveRecord(data) {
   try {
     await connectDB();
@@ -31,7 +16,7 @@ export async function saveRecord(data) {
       // Hashed patient identity
       patientHash: '0x' + keccak256(data.email.toLowerCase()),
 
-      // These fields will remain plain text
+      // These fields remain plain text
       name: data.name,
       gender: data.gender,
       age: data.age,
@@ -39,8 +24,10 @@ export async function saveRecord(data) {
       result: data.result,
       notes: data.notes,
 
-      // Hashed or encrypted for privacy
-      doctorHash: encrypt(data.doctor),
+      // Doctor is hashed now
+      doctorHash: '0x' + keccak256(data.doctor),
+
+      // Hashed hospital and record identity
       hospitalName: data.hospital,
       recordID: data.recordID
     };
