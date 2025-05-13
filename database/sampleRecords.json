@@ -1,0 +1,21 @@
+{
+    "ecg-report-001": {
+      "patient": "John Doe",
+      "age": 42,
+      "test": "ECG",
+      "result": "Mild arrhythmia",
+      "doctor": "Dr. Kavya",
+      "notes": "Recommended follow-up in 2 weeks",
+      "timestamp": "2025-05-10T13:20:00Z"
+    },
+    "blood-test-123": {
+      "patient": "Ayesha Khan",
+      "age": 35,
+      "test": "Blood Test",
+      "result": "Cholesterol: High",
+      "doctor": "Dr. Rao",
+      "notes": "Start statins and reduce oily food",
+      "timestamp": "2025-05-08T09:30:00Z"
+    }
+  }
+  
