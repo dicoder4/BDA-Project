@@ -6,6 +6,31 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "patientHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "dataGeneratorID",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "recordID",
+						"type": "string"
+					}
+				],
+				"name": "RecordIndexed",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "bytes32",
@@ -37,6 +62,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getAllPatients",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "bytes32",
@@ -62,35 +100,12 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {
-				"access(bytes32)": {
-					"params": {
-						"hashedPatientID": "The hashed patient identity"
-					},
-					"returns": {
-						"_0": "An array of records"
-					}
-				},
-				"index(bytes32,string,string)": {
-					"params": {
-						"dataGeneratorID": "The hospital/doctor/lab ID that created the record",
-						"hashedPatientID": "The hashed identifier for the patient",
-						"recordID": "A pointer to the record (e.g., IPFS hash, database ID)"
-					}
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {
-				"access(bytes32)": {
-					"notice": "Access all records for a hashed patient ID"
-				},
-				"index(bytes32,string,string)": {
-					"notice": "Index a new EHR record on the blockchain"
-				}
-			},
+			"methods": {},
 			"version": 1
 		}
 	},
@@ -111,11 +126,11 @@
 	},
 	"sources": {
 		"smart-contract/EHRSharing.sol": {
-			"keccak256": "0xb2f4165e15e8b76462eb040773102138316fa0dd713f4a5e20f45980b3cecd27",
+			"keccak256": "0x4210772594c472df28e3e303f4396f68cb998f0322e5331921bd36966eb77aa4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f460262cbf873e0dc575016f7dc7325da73a49d1a958055db42a391d6f2cb319",
-				"dweb:/ipfs/QmeQFWp8MDJp6B7522GrB9iK72KcCLFFdsjJmdSy8CkQpc"
+				"bzz-raw://d0dc7084c7d925f912b1c9d1d4158564f4d239b886edb8c7a7628b7fbc72d5b7",
+				"dweb:/ipfs/QmY5nMpcHtpJuJVBoxmQdmpUawAEryBZZGk1zWdSjh4xs6"
 			]
 		}
 	},

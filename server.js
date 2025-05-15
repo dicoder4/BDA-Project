@@ -15,11 +15,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Middleware
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 
-// ✅ DB Connection
 connectDB();
 
 // 🔐 Decrypt helper
@@ -45,7 +43,7 @@ function decrypt(obj) {
   }
 }
 
-// ✅ Save EHR Record
+// ✅ Save Record
 app.post('/api/saveRecord', async (req, res) => {
   try {
     console.log('📥 Incoming data:', req.body);
@@ -57,19 +55,17 @@ app.post('/api/saveRecord', async (req, res) => {
   }
 });
 
-// ✅ Fetch Records
+// ✅ Fetch Record
 app.post('/api/getRecords', async (req, res) => {
   try {
     const { recordIDs, email } = req.body;
 
     console.log('📡 Received fetch request for recordIDs:', recordIDs, 'Email:', email);
-
     if (!email || !Array.isArray(recordIDs) || recordIDs.length === 0) {
       return res.status(400).json({ error: 'Missing or invalid email or record IDs' });
     }
 
     const hashedEmail = '0x' + keccak256(email.toLowerCase());
-
     const records = await Record.find({
       recordID: { $in: recordIDs },
       patientHash: hashedEmail
@@ -78,7 +74,7 @@ app.post('/api/getRecords', async (req, res) => {
     console.log(`📦 ${records.length} record(s) matched for patientHash: ${hashedEmail}`);
 
     const decrypted = records.map(rec => ({
-      hospitalHash: rec.hospitalHash, // ✅ corrected field name
+      hospitalName: rec.hospitalName,
       name: rec.name,
       gender: rec.gender,
       age: rec.age,
